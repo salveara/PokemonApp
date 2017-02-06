@@ -35,7 +35,7 @@ public class Pokemon {
 	protected Pokemon() {
 	}
 
-	public Pokemon(String name, List<Type> type, List<Type> weakness, Pokemon evolution, String image) {
+	public Pokemon(Long id, String name, List<Type> type, List<Type> weakness, Pokemon evolution, String image) {
 		this.name = name;
 		this.type = type;
 		this.weakness = weakness;

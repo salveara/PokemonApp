@@ -40,10 +40,10 @@ public class PokemonInit {
 		weaknesses.add(typeRepository.findById(2L));
 		weaknesses.add(typeRepository.findById(3L));
 		
-		Pokemon pikachu = new Pokemon("Pikachu", types, weaknesses, null,
+		Pokemon pikachu = new Pokemon(1L, "Pikachu", types, weaknesses, null,
 				"http://cdn.bulbagarden.net/upload/0/0d/025Pikachu.png");
 		pokemonRepository.save(pikachu);
-		Pokemon raichu = new Pokemon("Raichu", types, weaknesses, null,
+		Pokemon raichu = new Pokemon(2L, "Raichu", types, weaknesses, null,
 				"http://cdn.bulbagarden.net/upload/8/88/026Raichu.png");
 		pokemonRepository.save(raichu);
 
@@ -54,7 +54,7 @@ public class PokemonInit {
 		weaknesses = new ArrayList<Type>();
 		weaknesses.add(typeRepository.findById(7L));
 		
-		Pokemon bulbasaur = new Pokemon("Bulbasaur", types, weaknesses, null,
+		Pokemon bulbasaur = new Pokemon(3L, "Bulbasaur", types, weaknesses, null,
 				"http://cdn.bulbagarden.net/upload/2/21/001Bulbasaur.png");
 		pokemonRepository.save(bulbasaur);
 		
