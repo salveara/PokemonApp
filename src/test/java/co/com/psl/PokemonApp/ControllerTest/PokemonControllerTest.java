@@ -1,10 +1,8 @@
-package co.com.psl.PokemonApp;
+package co.com.psl.PokemonApp.ControllerTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,14 +21,14 @@ public class PokemonControllerTest {
 	    private MockMvc mockMvc;
 	 
 	 @Test
-	 public void GetAllPokemon() throws Exception{
+	 public void getAllPokemon() throws Exception{
 		 this.mockMvc.perform(get("/pokemon"))
 		 .andExpect(status().isOk())
 		 .andExpect(jsonPath("$", hasSize(3)));
 	 }
 	 
 	 @Test
-	 public void GetPokemonByName() throws Exception{
+	 public void getPokemonByName() throws Exception{
 		 this.mockMvc.perform(get("/pokemon").param("name", "Pika"))
          .andExpect(status().isOk())
          .andExpect(jsonPath("$", hasSize(1)))
@@ -39,35 +37,12 @@ public class PokemonControllerTest {
 	 }
 	 
 	 @Test
-	 public void GetPokemonById() throws Exception{
+	 public void getPokemonById() throws Exception{
 		 this.mockMvc.perform(get("/pokemon/3"))
 		 .andExpect(status().isOk())
-		 .andExpect(jsonPath("$", hasSize(1)))
-		 .andExpect(jsonPath("$[0].id").value("3"))
-		 .andExpect(jsonPath("$[0].name").value("Bulbasour"));
-	 }
-
-	 @Test
-	 public void GetAllType() throws Exception{
-		 this.mockMvc.perform(get("/pokemon/type"))
-		 .andExpect(status().isOk())
-		 .andExpect(jsonPath("$", hasSize(7)));
-	 }
-
-	 @Test
-	 public void GetTypeBynName() throws Exception{
-		 this.mockMvc.perform(get("/pokemon/type").param("name", "Ele"))
-		 .andExpect(status().isOk())
-		 .andExpect(jsonPath("$", hasSize(1)))
-		 .andExpect(jsonPath("$[0].type").value("Electric"));
-	 }
-	 
-	 @Test
-	 public void GetTypeBynId() throws Exception{
-		 this.mockMvc.perform(get("/pokemon/type/1"))
-		 .andExpect(status().isOk())
-		 .andExpect(jsonPath("$", hasSize(1)))
-		 .andExpect(jsonPath("$[0].type").value("Electric"));
+		 .andExpect(jsonPath("$").exists())
+		 .andExpect(jsonPath("$.id").value("3"))
+		 .andExpect(jsonPath("$.name").value("Bulbasaur"));
 	 }
 
 }

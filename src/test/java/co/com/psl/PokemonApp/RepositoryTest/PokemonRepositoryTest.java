@@ -1,4 +1,4 @@
-package co.com.psl.PokemonApp;
+package co.com.psl.PokemonApp.RepositoryTest;
 
 import static org.junit.Assert.*;
 

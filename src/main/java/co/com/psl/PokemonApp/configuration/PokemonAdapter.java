@@ -19,8 +19,10 @@ public class PokemonAdapter {
 		if (pokemon.getEvolution() != null)
 			pokemonDto.setEvolutionId(pokemon.getEvolution().getId());
 		pokemonDto.setImage(pokemon.getImage());
-		pokemonDto.setType(typesToString(pokemon.getType()));
-		pokemonDto.setWeakness(typesToString(pokemon.getWeakness()));
+		if (pokemon.getType() != null)
+			pokemonDto.setType(typesToString(pokemon.getType()));
+		if (pokemon.getWeakness() != null)
+			pokemonDto.setWeakness(typesToString(pokemon.getWeakness()));
 		return pokemonDto;
 	}
 
