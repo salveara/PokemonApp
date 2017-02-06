@@ -4,68 +4,73 @@ import java.util.List;
 
 public class PokemonDto {
 	
-	private String id;
+	private Long id;
     private String name;
     private List<String> type;
     private List<String> weakness;
-    private String evolutionId;
+    private Long evolutionId;
     private String image;
 
-    public PokemonDto(String id, String name, List<String> type, List<String> weakness, String evolutionId, String image) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.weakness = weakness;
-        this.evolutionId = evolutionId;
-        this.image = image;
-    }
+    public PokemonDto(){}
 
-    public String getId() {
-        return id;
-    }
+	public PokemonDto(Long id, String name, List<String> type, List<String> weakness, Long evolutionId, String image) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.weakness = weakness;
+		this.evolutionId = evolutionId;
+		this.image = image;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public List<String> getType() {
-        return type;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setType(List<String> type) {
-        this.type = type;
-    }
+	public List<String> getType() {
+		return type;
+	}
 
-    public List<String> getWeakness() {
-        return weakness;
-    }
+	public void setType(List<String> type) {
+		this.type = type;
+	}
 
-    public void setWeakness(List<String> weakness) {
-        this.weakness = weakness;
-    }
+	public List<String> getWeakness() {
+		return weakness;
+	}
 
-    public String getEvolutionId() {
-        return evolutionId;
-    }
+	public void setWeakness(List<String> weakness) {
+		this.weakness = weakness;
+	}
 
-    public void setEvolutionId(String evolutionId) {
-        this.evolutionId = evolutionId;
-    }
+	public Long getEvolutionId() {
+		return evolutionId;
+	}
 
-    public String getImage() {
-        return image;
-    }
+	public void setEvolutionId(Long evolutionId) {
+		this.evolutionId = evolutionId;
+	}
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	};
+    
+   
 
 }

@@ -1,5 +1,6 @@
 package co.com.psl.PokemonApp.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,35 +11,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.psl.PokemonApp.configuration.PokemonAdapter;
+import co.com.psl.PokemonApp.configuration.PokemonInit;
 import co.com.psl.PokemonApp.dto.Pokemon;
+import co.com.psl.PokemonApp.dto.PokemonDto;
 import co.com.psl.PokemonApp.dto.Type;
 import co.com.psl.PokemonApp.repository.PokemonRepository;
 import co.com.psl.PokemonApp.repository.TypeRepository;
 
 @RestController
 public class PokemonController {
-	@Autowired
-    private PokemonRepository pokemonRepository;
 
-    @Autowired
-    private TypeRepository typeRepository;
-    
-    @RequestMapping(value = "/pokemon", method = RequestMethod.GET)
-	public @ResponseBody List<Pokemon> allPokemon(@RequestParam(value="name", required = false) String name) {
+	@Autowired
+	private PokemonRepository pokemonRepository;
+	@Autowired
+	private TypeRepository typeRepository;
+	@Autowired
+	private PokemonAdapter pokemonAdapter = new PokemonAdapter();
+
+	@RequestMapping(value = "/pokemon", method = RequestMethod.GET)
+	public @ResponseBody List<PokemonDto> allPokemon(@RequestParam(value = "name", required = false) String name) {
+		List<Pokemon> pokemonList;
 		if (name == null) {
-			return pokemonRepository.findAll();
+			pokemonList = pokemonRepository.findAll();
+			return pokemonAdapter.pokemonDtoToList(pokemonList);
 		} else {
-			return pokemonRepository.findByNameContaining(name);
+			pokemonList = pokemonRepository.findByNameContaining(name);
+			return pokemonAdapter.pokemonDtoToList(pokemonList);
 		}
 	}
-    
-    @RequestMapping(value = "/pokemon/{id}", method = RequestMethod.GET)
-	public @ResponseBody List<Pokemon> PokemonById(@PathVariable("id") long id) {
-		return (List<Pokemon>) pokemonRepository.findById(id);
+
+	@RequestMapping(value = "/pokemon/{id}", method = RequestMethod.GET)
+	public @ResponseBody PokemonDto PokemonById(@PathVariable("id") long id) {
+		Pokemon pokemon = pokemonRepository.findById(id);
+		return pokemonAdapter.pokemonToPokemonDto(pokemon);
 	}
-	
+
 	@RequestMapping(value = "pokemon/type", method = RequestMethod.GET)
-	public @ResponseBody List<Type> allTypes(@RequestParam(value="name", required = false) String name) {
+	public @ResponseBody List<Type> allTypes(@RequestParam(value = "name", required = false) String name) {
 		if (name == null) {
 			return typeRepository.findAll();
 		} else {
@@ -47,8 +57,8 @@ public class PokemonController {
 	}
 
 	@RequestMapping(value = "pokemon/type/{id}", method = RequestMethod.GET)
-	public @ResponseBody List<Type> TypesById(@PathVariable("id") long id) {
-		return (List<Type>) typeRepository.findById(id);
+	public @ResponseBody Type TypesById(@PathVariable("id") long id) {
+		return typeRepository.findById(id);
 	}
 
 }
